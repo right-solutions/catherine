@@ -21,6 +21,13 @@ module Catherine
           redirect_to default_redirect_url_after_sign_in
         end
       end
+
+      def configure_filter_param_mapping
+        @filter_param_mapping = default_filter_param_mapping
+        @filter_param_mapping[:super_admin] = :sa
+        @filter_param_mapping[:user] = :us
+        @filter_param_mapping[:feature] = :ft
+      end
       
     end	
   end

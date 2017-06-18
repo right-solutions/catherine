@@ -1,0 +1,116 @@
+<div class="sidebar-menu toggle-others fixed collapsed">
+	
+	<div class="sidebar-menu-inner">
+		
+		<header class="logo-env">
+			
+			<!-- logo -->
+			<div class="logo">
+				<a href="/" class="logo-expanded">
+					<img src="/assets/kuppayam/logo.png" width="180" alt="" />
+				</a>
+				
+				<a href="/" class="logo-collapsed">
+					<img src="/assets/kuppayam/logo.png" width="40" alt="" />
+				</a>
+			</div>
+			
+			<!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+			<div class="mobile-menu-toggle visible-xs">
+				<a href="#" data-toggle="user-info-menu">
+					<i class="fa-bell-o"></i>
+					<span class="badge badge-success">7</span>
+				</a>
+				
+				<a href="#" data-toggle="mobile-menu">
+					<i class="fa-bars"></i>
+				</a>
+			</div>
+		</header>
+		
+		<ul id="main-menu" class="main-menu">
+			
+			<!-- add class "multiple-expanded" to allow multiple submenus to open -->
+			
+			<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+			
+			<!-- Dashboard -->
+			<li class="<%= nav_active?('admin/dashboard') ? 'active' : ''  %>">
+				<% if @current_user && (@current_user.super_admin? || @current_user.has_role?("Site Admin")) %>
+					<%= link_to raw("<i class=\"linecons-desktop\"></i> <span class='title'>Dashboard</span>"), catherine.admin_dashboard_url %>
+				<% else %>
+					<%= link_to raw("<i class=\"linecons-desktop\"></i> <span class='title'>Dashboard</span>"), catherine.user_dashboard_url %>
+				<% end %>
+			</li>
+			
+			<!-- Configurations -->
+			<% if @current_user && @current_user.super_admin? %>
+			<li class="">
+				<a href="#">
+					<i class="linecons-params"></i>
+					<span class="title">Configurations</span>
+				</a>
+				<ul>
+
+					<li class="">
+						<%= link_to raw("<i class=\"linecons-globe\"></i> <span class='title'>Countries</span>"), catherine.admin_countries_url %>
+					</li>
+
+					<li class="">
+						<%= link_to raw("<i class=\"linecons-diamond\"></i> <span class='title'>Features</span>"), usman.admin_features_url %>
+					</li>
+
+					<li class="<%= nav_class("admin/users") %>">
+						<%= link_to raw("<i class=\"linecons-lock\"></i> <span class='title'>Manage Permissions</span>"), usman.admin_permissions_url %>
+					</li>
+
+				</ul>
+			</li>
+			<% end %>
+
+			<!-- Administration -->
+			<% if @current_user && (@current_user.super_admin? || @current_user.has_role?("Site Admin")) %>
+			<li class="">
+				<a href="#">
+					<i class="linecons-cog"></i>
+					<span class="title">Administration</span>
+				</a>
+				<ul>
+
+					<li class="<%= nav_class("admin/users") %>">
+				    <%= link_to raw("<i class=\"linecons-user\"></i> <span class='title'>Manage Users</span>"), usman.admin_users_url %>
+				  </li>
+
+				  <li class="">
+						<%= link_to raw("<i class=\"linecons-graduation-cap\"></i> <span class='title'>Manage Roles</span>"), usman.admin_roles_url %>
+					</li>
+
+				</ul>
+			</li>
+			<% end %>
+
+			<% if @current_user && @current_user.super_admin? %>
+			<li class="">
+				<a href="#">
+					<i class="linecons-database"></i>
+					<span class="title">Monitoring</span>
+				</a>
+				<ul>
+					
+					<li class="">
+						<%= link_to raw("<i class=\"fa-photo\"></i> <span class='title'>Manage Images</span>"), main_app.images_url %>
+					</li>
+
+					<li class="">
+						<%= link_to raw("<i class=\"fa-file\"></i> <span class='title'>Manage Documents</span>"), main_app.documents_url %>
+					</li>
+
+				</ul>
+			</li>
+			<% end %>
+
+		</ul>
+		
+	</div>
+	
+</div>
